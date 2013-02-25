@@ -8,7 +8,7 @@ sys.stdout = open(output_file, "w")
 
 #dice_aligner.align("train", "english", "chinese", 0.5, sys.maxint)
 #dice_aligner.align("train", "english", "chinese", 0.5, 100)
-ibm_model_1_aligner.align("train2", "english", "chinese", 1000, 10)
+ibm_model_1_aligner.align("train", "english", "chinese", 200000, 20, 1000)
 
 # Restore stdout redirection
 sys.stdout.close()

@@ -57,22 +57,3 @@ def align(train, english, chinese, num_sents, num_iterations, num_outputs):
         sys.stdout.write("\n")
     
     sys.stderr.write("Done.\n")
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
