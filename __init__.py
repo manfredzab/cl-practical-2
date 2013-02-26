@@ -1,17 +1,26 @@
-import sys, dice_aligner, ibm_model_1_aligner, ibm_model_2_aligner, score_calculator, converter
+import sys, aligner, score_calculator, combinator, converter
 
-output_file = "train.dice"
+number_of_sentences = 10000
+number_of_em_iterations = 10
+number_of_outputs = 100
 
-# Redirect stdout to output file
+forward_file = "forward.dice"
+backward_file = "reverse.dice"
+combined_file = "train.dice"
+
+aligner.align(True, forward_file, number_of_sentences, number_of_em_iterations, number_of_outputs)
+aligner.align(False, backward_file, number_of_sentences, number_of_em_iterations, number_of_outputs)
+
+score_calculator.print_score("train.alignment", forward_file)
+score_calculator.print_score("train.alignment", backward_file)
+
 stdout = sys.stdout
-sys.stdout = open(output_file, "w")
+sys.stdout = open(combined_file, "w")
 
-#dice_aligner.align("train", "english", "chinese", 0.5, sys.maxint)
-#dice_aligner.align("train", "english", "chinese", 0.5, 100)
-ibm_model_1_aligner.align("train", "english", "chinese", 1000, 10, 100)
+combinator.symmetrize(forward_file, backward_file)#
 
 # Restore stdout redirection
 sys.stdout.close()
 sys.stdout = stdout
 
-score_calculator.print_score("train.alignment", output_file)
+score_calculator.print_score("train.alignment", combined_file)
