@@ -1,4 +1,4 @@
-import sys, dice_aligner, ibm_model_1_aligner, score_calculator, converter
+import sys, dice_aligner, ibm_model_1_aligner, ibm_model_2_aligner, score_calculator, converter
 
 output_file = "train.dice"
 
@@ -8,7 +8,7 @@ sys.stdout = open(output_file, "w")
 
 #dice_aligner.align("train", "english", "chinese", 0.5, sys.maxint)
 #dice_aligner.align("train", "english", "chinese", 0.5, 100)
-ibm_model_1_aligner.align("train", "english", "chinese", 200000, 20, 1000)
+ibm_model_1_aligner.align("train", "english", "chinese", 1000, 10, 100)
 
 # Restore stdout redirection
 sys.stdout.close()
