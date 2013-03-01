@@ -1,8 +1,8 @@
 import sys, aligner, score_calculator, combinator, converter
 
-number_of_sentences = 10000
+number_of_sentences = 300000
 number_of_em_iterations = 10
-number_of_outputs = 100
+number_of_outputs = 3265
 
 forward_file = "forward.dice"
 backward_file = "reverse.dice"

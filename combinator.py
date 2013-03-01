@@ -18,26 +18,26 @@ def symmetrize(forward_file, backward_file):
             for ce in current_points.copy():
                 (c, e) = ce.split('-')
                 
-                for (delta_c, delta_e) in neighboring_points:                    
+                for (delta_c, delta_e) in neighboring_points:                 
                     (c_new, e_new) = (str(int(c) + delta_c), str(int(e) + delta_e))                     
                     
                     if (c_new, e_new) in union:
                         if (not is_c_covered(current_points, c_new)) or (not is_e_covered(current_points, e_new)):
                             current_points.add("%s-%s" % (c_new, e_new))
                             new_points_added = True
-                            
+
             if not new_points_added:
                 break
         
-        # final-and
+        # final
         for ce in union:
             (c, e) = ce.split('-')
 
-            if (not is_c_covered(current_points, c)) and (not is_e_covered(current_points, e)): # for "final" change the "and" in this line to "or"
+            if (not is_c_covered(current_points, c)) or (not is_e_covered(current_points, e)): # for "final-and" change the "or" in this line to "and"
                 current_points.add("%s-%s" % (c, e))
-                        
+
         sys.stdout.write(' '.join(current_points) + '\n')
-        
+
         
 def is_c_covered(point_set, c):
     for ce in point_set:

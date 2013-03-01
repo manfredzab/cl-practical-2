@@ -12,7 +12,7 @@ def align(forward, output_file, number_of_sentences, number_of_em_iterations, nu
         target = "chinese"
         source = "english"
 
-    ibm_model_2_aligner_relative_jump.align("train", target, source, number_of_sentences, number_of_em_iterations, number_of_outputs, not forward)
+    ibm_model_2_aligner.align("train", target, source, number_of_sentences, number_of_em_iterations, number_of_outputs, not forward)
 
     # Restore stdout redirection
     sys.stdout.close()

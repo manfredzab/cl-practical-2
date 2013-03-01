@@ -2,8 +2,7 @@
 import sys#, random
 from collections import defaultdict
 
-# Default threshold: 0.5, num_sents = sys.maxint
-def align(train, english, chinese, num_sents, num_iterations, num_outputs):
+def align(train, english, chinese, num_sents, num_iterations, num_outputs, reverse_output):
     f_data = "%s.%s" % (train, chinese)
     e_data = "%s.%s" % (train, english)
     
@@ -50,7 +49,7 @@ def align(train, english, chinese, num_sents, num_iterations, num_outputs):
             for (j, e_j) in enumerate(e):
                 if t[(c_i, e_j)] >= max_prob:
                     max_prob = t[(c_i, e_j)]
-                    best_alignment = "%i-%i " % (i, j)
+                    best_alignment = "%i-%i " % ((i, j) if not reverse_output else (j, i))
                     
             sys.stdout.write(best_alignment)
             

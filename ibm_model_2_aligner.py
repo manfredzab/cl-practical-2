@@ -2,8 +2,7 @@
 import sys, random
 from collections import defaultdict
 
-# Default threshold: 0.5, num_sents = sys.maxint
-def align(train, english, chinese, num_sents, num_iterations, num_outputs):
+def align(train, english, chinese, num_sents, num_iterations, num_outputs, reverse_output):
     f_data = "%s.%s" % (train, chinese)
     e_data = "%s.%s" % (train, english)
     
@@ -56,7 +55,6 @@ def align(train, english, chinese, num_sents, num_iterations, num_outputs):
 
     sys.stderr.write("E-M training finished.\nOutputting aligned pairs...\n")
     
-    alpha = 0.4
     for (c, e) in bitext[:num_outputs]:
         m = len(c)
         l = len(e)
@@ -67,11 +65,11 @@ def align(train, english, chinese, num_sents, num_iterations, num_outputs):
             best_alignment = "0-0"
             
             for (j, e_j) in enumerate(e):
-                prob = t[(c_i, e_j)] * (alpha / float(l) + (1.0 - alpha) * q[(j, i, l, m)])
+                prob = t[(c_i, e_j)] * q[(j, i, l, m)]
                 
                 if prob >= max_prob:
                     max_prob = prob
-                    best_alignment = "%i-%i " % (i, j)
+                    best_alignment = "%i-%i " % ((i, j) if not reverse_output else (j, i))
                     
             sys.stdout.write(best_alignment)
             
